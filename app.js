@@ -1,10 +1,15 @@
-import express from 'express';
+const express = require('express');
+const authRouter = require('./routes/authRouter.js');
+const cors = require('cors');
 
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send('Hello World');
-});
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+app.use(cors());
+
+app.use('/', authRouter);
 
 const PORT = process.env.PORT || 8080;
 

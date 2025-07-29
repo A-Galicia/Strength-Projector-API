@@ -13,12 +13,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module",
+  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/A-Galicia/Strength-Projector-API/issues"
   },
   "homepage": "https://github.com/A-Galicia/Strength-Projector-API#readme",
   "dependencies": {
+    "@prisma/client": "^6.12.0",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
