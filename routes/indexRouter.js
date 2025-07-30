@@ -42,6 +42,11 @@ router.put(
 
 // delete /////////////////////////////////////////////////////////
 
+router.delete(
+  '/api/excercises',
+  passport.authenticate('jwt', { session: false }),
+  indexCtrl.deleteStrength
+);
 // ________________________________________________________________
 
 module.exports = router;

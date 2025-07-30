@@ -75,19 +75,28 @@ class IndexCtrl {
         personalRecord: pr,
         currentRecord: req.body.strength[req.body.strength.length - 1],
       },
-      /* data: {
-        exercise: {
-          strength: req.body.strength,
-          personalRecord: pr,
-          currentRecord: req.body.strength[req.body.strength.length - 1],
-        },
-      }, */
     });
 
     if (!strengthData) {
       res.status(409).json({ message: 'Error: failed to add strength' });
     } else {
       res.status(201).json({ strength: strengthData });
+    }
+  });
+
+  deleteStrength = asyncHandler(async (req, res) => {
+    const user = await req.user;
+    const strengthData = await prisma.exercise.delete({
+      where: {
+        userId: user.id,
+        name: req.body.name,
+      },
+    });
+
+    if (!strengthData) {
+      res.status(409).json({ message: 'Error: failed to delete exercise' });
+    } else {
+      res.status(200).json({ user: user });
     }
   });
 }
