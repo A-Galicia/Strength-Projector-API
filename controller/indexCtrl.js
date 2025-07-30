@@ -61,7 +61,47 @@ class IndexCtrl {
       }
     }),
   ];
+
+  addStrength = asyncHandler(async (req, res) => {
+    const user = await req.user;
+    const pr = getPersonalRecord(req.body.strength);
+    const strengthData = await prisma.exercise.update({
+      where: {
+        userId: user.id,
+        name: req.body.name,
+      },
+      data: {
+        strength: req.body.strength,
+        personalRecord: pr,
+        currentRecord: req.body.strength[req.body.strength.length - 1],
+      },
+      /* data: {
+        exercise: {
+          strength: req.body.strength,
+          personalRecord: pr,
+          currentRecord: req.body.strength[req.body.strength.length - 1],
+        },
+      }, */
+    });
+
+    if (!strengthData) {
+      res.status(409).json({ message: 'Error: failed to add strength' });
+    } else {
+      res.status(201).json({ strength: strengthData });
+    }
+  });
 }
 
 const indexCtrl = new IndexCtrl();
 module.exports = indexCtrl;
+
+function getPersonalRecord(data) {
+  let res = data[0];
+  for (let i = 1; i < data.length; i++) {
+    if (parseInt(res.strength) <= parseInt(data[i].strength)) {
+      res = data[i];
+    }
+  }
+
+  return res;
+}

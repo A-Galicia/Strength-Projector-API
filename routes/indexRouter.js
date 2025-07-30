@@ -30,6 +30,12 @@ router.post(
 
 // Put ///////////////////////////////////////////////////////////
 
+router.put(
+  '/api/excercises',
+  passport.authenticate('jwt', { session: false }),
+  indexCtrl.addStrength
+);
+
 // ________________________________________________________________
 
 //
