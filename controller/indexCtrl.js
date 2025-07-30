@@ -19,6 +19,8 @@ class IndexCtrl {
       res.status(200).json({ excersices: excersices });
     }
   };
+
+  postExcersices = async (req, res) => {};
 }
 
 const indexCtrl = new IndexCtrl();

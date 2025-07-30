@@ -5,6 +5,8 @@ const bcrypt = require('bcryptjs');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const jwt = require('jsonwebtoken');
+const asyncHandler = require('express-async-handler');
+const { body, validationResult } = require('express-validator');
 
 // JWT Config /////////////////////////////////////////////////////
 
@@ -33,23 +35,39 @@ passport.use(
 const prisma = new PrismaClient();
 
 class AuthCtrl {
-  createUser = async (req, res) => {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    console.log(hashedPassword);
-    const user = await prisma.user.create({
-      data: {
-        name: req.body.username,
-        email: req.body.email,
-        password: hashedPassword,
-      },
-    });
+  createUser = [
+    body('username', 'Username must not be empty').trim().escape(),
+    body('email', 'must be a valid email (ex: example@gmail.com)')
+      .trim()
+      .isEmail()
+      .escape(),
+    body('password', 'Password must be a minimum of 5 characters')
+      .trim()
+      .isLength({ min: 5 })
+      .escape(),
+    asyncHandler(async (req, res) => {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      }
 
-    if (!user) {
-      res.status(409).json({ message: 'Error: username or email is taken' });
-    } else {
-      res.status(201).json({ message: 'Created User', user: user });
-    }
-  };
+      const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+      const user = await prisma.user.create({
+        data: {
+          name: req.body.username,
+          email: req.body.email,
+          password: hashedPassword,
+        },
+      });
+
+      if (!user) {
+        res.status(409).json({ message: 'Error: username or email is taken' });
+      } else {
+        res.status(201).json({ message: 'Created User', user: user });
+      }
+    }),
+  ];
 
   login = async (req, res, next) => {
     try {
