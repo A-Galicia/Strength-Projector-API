@@ -1,7 +1,7 @@
 require('dotenv').config();
+const { PrismaClient } = require('../generated/prisma');
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
-const { PrismaClient } = require('../generated/prisma');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const jwt = require('jsonwebtoken');
