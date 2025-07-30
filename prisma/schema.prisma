@@ -27,7 +27,7 @@ model Exercise{
   user User @relation(fields: [userId], references: [id])
   userId String
   name String @unique
-  strength Json
-  personalRecord Json
-  currentRecord Json
+  strength Json?
+  personalRecord Json?
+  currentRecord Json?
 }

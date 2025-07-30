@@ -21,7 +21,7 @@ router.get(
 router.post(
   '/api/excercises',
   passport.authenticate('jwt', { session: false }),
-  indexCtrl.postExcersices
+  indexCtrl.createExercise
 );
 
 //_________________________________________________________________
