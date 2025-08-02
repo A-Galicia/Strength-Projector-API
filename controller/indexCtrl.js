@@ -1,19 +1,15 @@
 const { PrismaClient, Prisma } = require('../generated/prisma');
 const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require('express-validator');
-const { connect } = require('../routes/indexRouter');
 
 const prisma = new PrismaClient();
 
 class IndexCtrl {
   getExcersices = async (req, res) => {
     const user = await req.user;
-    const exercises = await prisma.user.findMany({
+    const exercises = await prisma.exercise.findMany({
       where: {
-        id: user.id,
-      },
-      include: {
-        exercise: true,
+        userId: user.id,
       },
     });
 
@@ -48,6 +44,9 @@ class IndexCtrl {
               id: user.id,
             },
           },
+          strength: [],
+          personalRecord: [],
+          currentRecord: [],
         },
         include: {
           user: true,
@@ -84,12 +83,12 @@ class IndexCtrl {
     }
   });
 
-  deleteStrength = asyncHandler(async (req, res) => {
+  deleteExercise = asyncHandler(async (req, res) => {
     const user = await req.user;
     const strengthData = await prisma.exercise.delete({
       where: {
         userId: user.id,
-        name: req.body.name,
+        id: req.body.id,
       },
     });
 
@@ -103,6 +102,8 @@ class IndexCtrl {
 
 const indexCtrl = new IndexCtrl();
 module.exports = indexCtrl;
+
+// functions //////////////////////////////////////////////////////
 
 function getPersonalRecord(data) {
   let res = data[0];

@@ -46,25 +46,39 @@ class AuthCtrl {
       .isLength({ min: 5 })
       .escape(),
     asyncHandler(async (req, res) => {
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-      }
+      try {
+        if (req.body.password !== req.body.confirm) {
+          const error = [{ msg: 'passwords do not match' }];
+          res.status(409).json({ errors: error });
+        }
 
-      const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          return res.status(400).json({ errors: errors.array() });
+        }
 
-      const user = await prisma.user.create({
-        data: {
-          name: req.body.username,
-          email: req.body.email,
-          password: hashedPassword,
-        },
-      });
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
-      if (!user) {
-        res.status(409).json({ message: 'Error: username or email is taken' });
-      } else {
-        res.status(201).json({ message: 'Created User', user: user });
+        const user = await prisma.user.create({
+          data: {
+            name: req.body.username,
+            email: req.body.email,
+            password: hashedPassword,
+          },
+        });
+
+        if (!user) {
+          const error = [{ msg: 'Error: username or email is taken' }];
+          res.status(409).json({ errors: error });
+        } else {
+          res.status(201).json({ message: 'Created User', user: user });
+        }
+      } catch (err) {
+        if ((err.code = 'P2002')) {
+          err.message = 'Name or email is already taken';
+        }
+        const error = [{ msg: err.message }];
+        res.status(409).json({ errors: error });
       }
     }),
   ];

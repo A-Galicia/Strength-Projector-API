@@ -7,7 +7,7 @@ const router = Router();
 // Get ////////////////////////////////////////////////////////////
 
 router.get(
-  '/api/excercises',
+  '/api/exercises',
   passport.authenticate('jwt', { session: false }),
   indexCtrl.getExcersices
 );
@@ -19,7 +19,7 @@ router.get(
 // Post ///////////////////////////////////////////////////////////
 
 router.post(
-  '/api/excercises',
+  '/api/exercises',
   passport.authenticate('jwt', { session: false }),
   indexCtrl.createExercise
 );
@@ -31,7 +31,7 @@ router.post(
 // Put ///////////////////////////////////////////////////////////
 
 router.put(
-  '/api/excercises',
+  '/api/exercises',
   passport.authenticate('jwt', { session: false }),
   indexCtrl.addStrength
 );
@@ -43,9 +43,9 @@ router.put(
 // delete /////////////////////////////////////////////////////////
 
 router.delete(
-  '/api/excercises',
+  '/api/exercises',
   passport.authenticate('jwt', { session: false }),
-  indexCtrl.deleteStrength
+  indexCtrl.deleteExercise
 );
 // ________________________________________________________________
 
