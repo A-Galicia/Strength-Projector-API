@@ -2178,9 +2178,9 @@ export namespace Prisma {
     id: string
     userId: string
     name: string
-    strength: JsonValue
-    personalRecord: JsonValue
-    currentRecord: JsonValue
+    strength: JsonValue | null
+    personalRecord: JsonValue | null
+    currentRecord: JsonValue | null
     _count: ExerciseCountAggregateOutputType | null
     _min: ExerciseMinAggregateOutputType | null
     _max: ExerciseMaxAggregateOutputType | null
@@ -2259,9 +2259,9 @@ export namespace Prisma {
       id: string
       userId: string
       name: string
-      strength: Prisma.JsonValue
-      personalRecord: Prisma.JsonValue
-      currentRecord: Prisma.JsonValue
+      strength: Prisma.JsonValue | null
+      personalRecord: Prisma.JsonValue | null
+      currentRecord: Prisma.JsonValue | null
     }, ExtArgs["result"]["exercise"]>
     composites: {}
   }
@@ -3150,11 +3150,12 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
-  export const JsonNullValueInput: {
+  export const NullableJsonNullValueInput: {
+    DbNull: typeof DbNull,
     JsonNull: typeof JsonNull
   };
 
-  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
   export const QueryMode: {
@@ -3172,6 +3173,14 @@ export namespace Prisma {
   };
 
   export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -3281,9 +3290,9 @@ export namespace Prisma {
     id?: StringFilter<"Exercise"> | string
     userId?: StringFilter<"Exercise"> | string
     name?: StringFilter<"Exercise"> | string
-    strength?: JsonFilter<"Exercise">
-    personalRecord?: JsonFilter<"Exercise">
-    currentRecord?: JsonFilter<"Exercise">
+    strength?: JsonNullableFilter<"Exercise">
+    personalRecord?: JsonNullableFilter<"Exercise">
+    currentRecord?: JsonNullableFilter<"Exercise">
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -3291,9 +3300,9 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     name?: SortOrder
-    strength?: SortOrder
-    personalRecord?: SortOrder
-    currentRecord?: SortOrder
+    strength?: SortOrderInput | SortOrder
+    personalRecord?: SortOrderInput | SortOrder
+    currentRecord?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -3304,9 +3313,9 @@ export namespace Prisma {
     OR?: ExerciseWhereInput[]
     NOT?: ExerciseWhereInput | ExerciseWhereInput[]
     userId?: StringFilter<"Exercise"> | string
-    strength?: JsonFilter<"Exercise">
-    personalRecord?: JsonFilter<"Exercise">
-    currentRecord?: JsonFilter<"Exercise">
+    strength?: JsonNullableFilter<"Exercise">
+    personalRecord?: JsonNullableFilter<"Exercise">
+    currentRecord?: JsonNullableFilter<"Exercise">
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "name">
 
@@ -3314,9 +3323,9 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     name?: SortOrder
-    strength?: SortOrder
-    personalRecord?: SortOrder
-    currentRecord?: SortOrder
+    strength?: SortOrderInput | SortOrder
+    personalRecord?: SortOrderInput | SortOrder
+    currentRecord?: SortOrderInput | SortOrder
     _count?: ExerciseCountOrderByAggregateInput
     _max?: ExerciseMaxOrderByAggregateInput
     _min?: ExerciseMinOrderByAggregateInput
@@ -3329,9 +3338,9 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Exercise"> | string
     userId?: StringWithAggregatesFilter<"Exercise"> | string
     name?: StringWithAggregatesFilter<"Exercise"> | string
-    strength?: JsonWithAggregatesFilter<"Exercise">
-    personalRecord?: JsonWithAggregatesFilter<"Exercise">
-    currentRecord?: JsonWithAggregatesFilter<"Exercise">
+    strength?: JsonNullableWithAggregatesFilter<"Exercise">
+    personalRecord?: JsonNullableWithAggregatesFilter<"Exercise">
+    currentRecord?: JsonNullableWithAggregatesFilter<"Exercise">
   }
 
   export type UserCreateInput = {
@@ -3390,9 +3399,9 @@ export namespace Prisma {
   export type ExerciseCreateInput = {
     id?: string
     name: string
-    strength: JsonNullValueInput | InputJsonValue
-    personalRecord: JsonNullValueInput | InputJsonValue
-    currentRecord: JsonNullValueInput | InputJsonValue
+    strength?: NullableJsonNullValueInput | InputJsonValue
+    personalRecord?: NullableJsonNullValueInput | InputJsonValue
+    currentRecord?: NullableJsonNullValueInput | InputJsonValue
     user: UserCreateNestedOneWithoutExerciseInput
   }
 
@@ -3400,17 +3409,17 @@ export namespace Prisma {
     id?: string
     userId: string
     name: string
-    strength: JsonNullValueInput | InputJsonValue
-    personalRecord: JsonNullValueInput | InputJsonValue
-    currentRecord: JsonNullValueInput | InputJsonValue
+    strength?: NullableJsonNullValueInput | InputJsonValue
+    personalRecord?: NullableJsonNullValueInput | InputJsonValue
+    currentRecord?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ExerciseUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    strength?: JsonNullValueInput | InputJsonValue
-    personalRecord?: JsonNullValueInput | InputJsonValue
-    currentRecord?: JsonNullValueInput | InputJsonValue
+    strength?: NullableJsonNullValueInput | InputJsonValue
+    personalRecord?: NullableJsonNullValueInput | InputJsonValue
+    currentRecord?: NullableJsonNullValueInput | InputJsonValue
     user?: UserUpdateOneRequiredWithoutExerciseNestedInput
   }
 
@@ -3418,35 +3427,35 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    strength?: JsonNullValueInput | InputJsonValue
-    personalRecord?: JsonNullValueInput | InputJsonValue
-    currentRecord?: JsonNullValueInput | InputJsonValue
+    strength?: NullableJsonNullValueInput | InputJsonValue
+    personalRecord?: NullableJsonNullValueInput | InputJsonValue
+    currentRecord?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ExerciseCreateManyInput = {
     id?: string
     userId: string
     name: string
-    strength: JsonNullValueInput | InputJsonValue
-    personalRecord: JsonNullValueInput | InputJsonValue
-    currentRecord: JsonNullValueInput | InputJsonValue
+    strength?: NullableJsonNullValueInput | InputJsonValue
+    personalRecord?: NullableJsonNullValueInput | InputJsonValue
+    currentRecord?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ExerciseUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    strength?: JsonNullValueInput | InputJsonValue
-    personalRecord?: JsonNullValueInput | InputJsonValue
-    currentRecord?: JsonNullValueInput | InputJsonValue
+    strength?: NullableJsonNullValueInput | InputJsonValue
+    personalRecord?: NullableJsonNullValueInput | InputJsonValue
+    currentRecord?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ExerciseUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    strength?: JsonNullValueInput | InputJsonValue
-    personalRecord?: JsonNullValueInput | InputJsonValue
-    currentRecord?: JsonNullValueInput | InputJsonValue
+    strength?: NullableJsonNullValueInput | InputJsonValue
+    personalRecord?: NullableJsonNullValueInput | InputJsonValue
+    currentRecord?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -3512,14 +3521,14 @@ export namespace Prisma {
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
   }
-  export type JsonFilter<$PrismaModel = never> =
+  export type JsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
-        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonFilterBase<$PrismaModel>>
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
       >
-    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
 
-  export type JsonFilterBase<$PrismaModel = never> = {
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
     equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
     path?: string[]
     mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
@@ -3539,6 +3548,11 @@ export namespace Prisma {
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type ExerciseCountOrderByAggregateInput = {
@@ -3561,14 +3575,14 @@ export namespace Prisma {
     userId?: SortOrder
     name?: SortOrder
   }
-  export type JsonWithAggregatesFilter<$PrismaModel = never> =
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
     | PatchUndefined<
-        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
       >
-    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
 
-  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
     equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
     path?: string[]
     mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
@@ -3583,9 +3597,9 @@ export namespace Prisma {
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedJsonFilter<$PrismaModel>
-    _max?: NestedJsonFilter<$PrismaModel>
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
   export type ExerciseCreateNestedManyWithoutUserInput = {
@@ -3689,14 +3703,25 @@ export namespace Prisma {
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
   }
-  export type NestedJsonFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
-        Required<NestedJsonFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
 
-  export type NestedJsonFilterBase<$PrismaModel = never> = {
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+  export type NestedJsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
     equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
     path?: string[]
     mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
@@ -3716,17 +3741,17 @@ export namespace Prisma {
   export type ExerciseCreateWithoutUserInput = {
     id?: string
     name: string
-    strength: JsonNullValueInput | InputJsonValue
-    personalRecord: JsonNullValueInput | InputJsonValue
-    currentRecord: JsonNullValueInput | InputJsonValue
+    strength?: NullableJsonNullValueInput | InputJsonValue
+    personalRecord?: NullableJsonNullValueInput | InputJsonValue
+    currentRecord?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ExerciseUncheckedCreateWithoutUserInput = {
     id?: string
     name: string
-    strength: JsonNullValueInput | InputJsonValue
-    personalRecord: JsonNullValueInput | InputJsonValue
-    currentRecord: JsonNullValueInput | InputJsonValue
+    strength?: NullableJsonNullValueInput | InputJsonValue
+    personalRecord?: NullableJsonNullValueInput | InputJsonValue
+    currentRecord?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ExerciseCreateOrConnectWithoutUserInput = {
@@ -3762,9 +3787,9 @@ export namespace Prisma {
     id?: StringFilter<"Exercise"> | string
     userId?: StringFilter<"Exercise"> | string
     name?: StringFilter<"Exercise"> | string
-    strength?: JsonFilter<"Exercise">
-    personalRecord?: JsonFilter<"Exercise">
-    currentRecord?: JsonFilter<"Exercise">
+    strength?: JsonNullableFilter<"Exercise">
+    personalRecord?: JsonNullableFilter<"Exercise">
+    currentRecord?: JsonNullableFilter<"Exercise">
   }
 
   export type UserCreateWithoutExerciseInput = {
@@ -3814,33 +3839,33 @@ export namespace Prisma {
   export type ExerciseCreateManyUserInput = {
     id?: string
     name: string
-    strength: JsonNullValueInput | InputJsonValue
-    personalRecord: JsonNullValueInput | InputJsonValue
-    currentRecord: JsonNullValueInput | InputJsonValue
+    strength?: NullableJsonNullValueInput | InputJsonValue
+    personalRecord?: NullableJsonNullValueInput | InputJsonValue
+    currentRecord?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ExerciseUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    strength?: JsonNullValueInput | InputJsonValue
-    personalRecord?: JsonNullValueInput | InputJsonValue
-    currentRecord?: JsonNullValueInput | InputJsonValue
+    strength?: NullableJsonNullValueInput | InputJsonValue
+    personalRecord?: NullableJsonNullValueInput | InputJsonValue
+    currentRecord?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ExerciseUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    strength?: JsonNullValueInput | InputJsonValue
-    personalRecord?: JsonNullValueInput | InputJsonValue
-    currentRecord?: JsonNullValueInput | InputJsonValue
+    strength?: NullableJsonNullValueInput | InputJsonValue
+    personalRecord?: NullableJsonNullValueInput | InputJsonValue
+    currentRecord?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ExerciseUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    strength?: JsonNullValueInput | InputJsonValue
-    personalRecord?: JsonNullValueInput | InputJsonValue
-    currentRecord?: JsonNullValueInput | InputJsonValue
+    strength?: NullableJsonNullValueInput | InputJsonValue
+    personalRecord?: NullableJsonNullValueInput | InputJsonValue
+    currentRecord?: NullableJsonNullValueInput | InputJsonValue
   }
 
 
