@@ -2,6 +2,9 @@
   "name": "strength-projector-api",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "main": "index.js",
   "scripts": {
     "build": "node app.js"
