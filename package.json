@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/A-Galicia/Strength-Projector-API#readme",
   "dependencies": {
-    "@prisma/client": "^6.12.0",
+    "@prisma/client": "^6.13.0",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
@@ -34,6 +34,6 @@
     "passport-jwt": "^4.0.1"
   },
   "devDependencies": {
-    "prisma": "^6.12.0"
+    "prisma": "^6.13.0"
   }
 }
