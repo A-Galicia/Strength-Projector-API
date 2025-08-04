@@ -6,9 +6,6 @@
     "node": ">=22.0.0"
   },
   "main": "index.js",
-  "scripts": {
-    "build": "node app.js"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/A-Galicia/Strength-Projector-API.git"
