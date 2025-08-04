@@ -5,6 +5,9 @@
   "engines": {
     "node": ">=22.0.0"
   },
+  "scripts": {
+    "vercel-build": "echo Hello"
+  },
   "main": "index.js",
   "repository": {
     "type": "git",
