@@ -51,24 +51,27 @@ with historical data
   "id": "abc123",
   "exercise": "Bench Press",
   "strength": [
-    {day: "01/15/25" strength: 265}
-    {day: "02/01/25" strength: 255}
+    {"day": "01/15/25" "strength": 265}
+    {"day": "02/01/25" "strength": 255}
     ],
-  "personalRecord": {day: "01/15/25" strength: 265},
-  "currentRecord": {day: "02/01/25" strength: 255},
+  "personalRecord": {"day": "01/15/25", "strength": 265},
+  "currentRecord": {"day": "02/01/25", "strength": 255},
 
 }
 ```
 
 ---
 
-## Setup & Run Locally
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js & npm installed
+- Postgresql and the Strength-Projector app (also in my github repositories)
+
+### Setup & Run Locally
 
 git clone https://github.com/A-Galicia/Strength-Projector-API.git
 cd orm-tracker-api
 npm install
 node app
-
-```
-
-```
