@@ -41,8 +41,12 @@ https://strength-projector-api.vercel.app
   "reps": 5
 }
 
+```
+
 **Response:**
 with historical data
+
+```json
 {
   "id": "abc123",
   "exercise": "Bench Press",
@@ -54,6 +58,7 @@ with historical data
   "currentRecord": {day: "02/01/25" strength: 255},
 
 }
+```
 
 ---
 
@@ -63,4 +68,7 @@ git clone https://github.com/A-Galicia/Strength-Projector-API.git
 cd orm-tracker-api
 npm install
 node app
+
+```
+
 ```
