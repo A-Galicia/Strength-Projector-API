@@ -73,8 +73,10 @@ class IndexCtrl {
     const pr = getPersonalRecord(req.body.strength);
     const strengthData = await prisma.exercise.update({
       where: {
-        userId: user.id,
-        name: req.body.name,
+        userId_name: {
+          userId: user.id,
+          name: req.body.name,
+        },
       },
       data: {
         strength: req.body.strength,
