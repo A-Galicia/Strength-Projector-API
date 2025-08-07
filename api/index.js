@@ -1,3 +1,5 @@
-import app from '../app';
+const app = require('../app.js');
 
-export default app;
+// This is purely for vercel to send requests to
+
+module.exports = app;

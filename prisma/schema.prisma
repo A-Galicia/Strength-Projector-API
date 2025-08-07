@@ -28,8 +28,10 @@ model Exercise{
   id String @id @default(uuid())
   user User @relation(fields: [userId], references: [id])
   userId String
-  name String @unique
+  name String
   strength Json?
   personalRecord Json?
   currentRecord Json?
+
+  @@unique([userId, name])
 }

@@ -29,36 +29,43 @@ class IndexCtrl {
       .withMessage('Name must only contain alphabet letters.')
       .escape(),
 
-    asyncHandler(async (req, res) => {
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-      }
+    async (req, res) => {
+      try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          return res.status(400).json({ errors: errors.array() });
+        }
 
-      const user = await req.user;
-      const exercise = await prisma.exercise.create({
-        data: {
-          name: req.body.exercise,
-          user: {
-            connect: {
-              id: user.id,
+        const user = await req.user;
+        const exercise = await prisma.exercise.create({
+          data: {
+            name: req.body.exercise,
+            user: {
+              connect: {
+                id: user.id,
+              },
             },
+            strength: [],
+            personalRecord: [],
+            currentRecord: [],
           },
-          strength: [],
-          personalRecord: [],
-          currentRecord: [],
-        },
-        include: {
-          user: true,
-        },
-      });
+          include: {
+            user: true,
+          },
+        });
 
-      if (!exercise) {
-        res.status(409).json({ message: 'Error: creation failed' });
-      } else {
-        res.status(201).json({ exercise: exercise });
+        if (!exercise) {
+          res.status(409).json({ message: 'Error: creation failed' });
+        } else {
+          res.status(201).json({ exercise: exercise });
+        }
+      } catch (err) {
+        if (err.code == 'P2002') {
+          res.status(400).json({ message: 'non-unique name' });
+        }
+        res.status(401).json({ message: 'Error: creation failed' });
       }
-    }),
+    },
   ];
 
   addStrength = asyncHandler(async (req, res) => {

@@ -3321,16 +3321,17 @@ export namespace Prisma {
 
   export type ExerciseWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    name?: string
+    userId_name?: ExerciseUserIdNameCompoundUniqueInput
     AND?: ExerciseWhereInput | ExerciseWhereInput[]
     OR?: ExerciseWhereInput[]
     NOT?: ExerciseWhereInput | ExerciseWhereInput[]
     userId?: StringFilter<"Exercise"> | string
+    name?: StringFilter<"Exercise"> | string
     strength?: JsonNullableFilter<"Exercise">
     personalRecord?: JsonNullableFilter<"Exercise">
     currentRecord?: JsonNullableFilter<"Exercise">
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id" | "name">
+  }, "id" | "userId_name">
 
   export type ExerciseOrderByWithAggregationInput = {
     id?: SortOrder
@@ -3566,6 +3567,11 @@ export namespace Prisma {
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
+  }
+
+  export type ExerciseUserIdNameCompoundUniqueInput = {
+    userId: string
+    name: string
   }
 
   export type ExerciseCountOrderByAggregateInput = {
