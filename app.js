@@ -6,7 +6,7 @@ const cors = require('cors');
 
 const app = express();
 
-app.use(nocache());
+//app.use(nocache());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
