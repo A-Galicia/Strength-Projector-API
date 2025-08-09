@@ -7,14 +7,11 @@ const cors = require('cors');
 
 const app = express();
 
+app.use(nocache());
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(nocache());
-app.use(
-  cors({
-    preflightContinue: true,
-  })
-);
+app.options('*', cors());
 /* app.use(
   cors({
     origin: '*',
