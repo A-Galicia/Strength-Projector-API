@@ -8,21 +8,21 @@ const cors = require('cors');
 const app = express();
 
 app.use(nocache());
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+//app.use(cors());
 //app.options('*', cors());
-/* app.use(
+app.use(
   cors({
     origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE, OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     preflightContinue: true,
-    optionsSuccessStatus: '204',
+    optionsSuccessStatus: '200',
     credentials: true,
   })
-); */
+);
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use('/', indexRouter);
 app.use('/', authRouter);
 
