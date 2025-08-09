@@ -24,17 +24,17 @@ router.post(
   indexCtrl.createExercise
 );
 
+router.post(
+  '/api/exercises/data',
+  passport.authenticate('jwt', { session: false }),
+  indexCtrl.addStrength
+);
+
 //_________________________________________________________________
 
 //
 
 // Put ///////////////////////////////////////////////////////////
-
-router.put(
-  '/api/exercises',
-  passport.authenticate('jwt', { session: false }),
-  indexCtrl.addStrength
-);
 
 // ________________________________________________________________
 
