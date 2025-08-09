@@ -8,8 +8,8 @@ const cors = require('cors');
 const app = express();
 
 app.use(nocache());
-//app.use(cors());
 app.options('*', cors());
+//app.use(cors());
 /* app.use(
   cors({
     methods: ['GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS'],
