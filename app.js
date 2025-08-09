@@ -10,8 +10,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 //app.use(nocache());
-//app.use(cors());
-app.use(
+app.use(cors());
+/* app.use(
   cors({
     origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
@@ -20,7 +20,7 @@ app.use(
     optionsSuccessStatus: '204',
     credentials: true,
   })
-);
+); */
 
 app.use('/', indexRouter);
 app.use('/', authRouter);
