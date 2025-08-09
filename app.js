@@ -9,21 +9,19 @@ const app = express();
 
 app.use(nocache());
 //app.use(cors());
-//app.options('*', cors());
-app.use(
+app.options('*', cors());
+/* app.use(
   cors({
-    methods: ['GET', 'POST', 'PUT', 'DELETE, OPTIONS'],
+    methods: ['GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    preflightContinue: false,
-    optionsSuccessStatus: '200',
     credentials: true,
   })
-);
+); */
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use('/', indexRouter);
-app.use('/', authRouter);
+app.use('/', cors(), indexRouter);
+app.use('/', cors(), authRouter);
 
 const PORT = process.env.PORT || 8080;
 
