@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: false }));
 //app.use(cors());
 app.use(
   cors({
-    origin: '*',
+    origin: ['http://localhost:8080', 'https://strength-projector.pages.dev/'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     preflightContinue: true,
