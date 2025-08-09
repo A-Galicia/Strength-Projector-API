@@ -7,15 +7,6 @@ const cors = require('cors');
 const app = express();
 
 app.use(nocache());
-app.options('*', cors());
-//app.use(cors());
-/* app.use(
-  cors({
-    methods: ['GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,
-  })
-); */
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
