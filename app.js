@@ -9,8 +9,12 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-//app.use(nocache());
-app.use(cors());
+app.use(nocache());
+app.use(
+  cors({
+    preflightContinue: true,
+  })
+);
 /* app.use(
   cors({
     origin: '*',
